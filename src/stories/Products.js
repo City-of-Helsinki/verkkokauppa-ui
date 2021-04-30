@@ -12,12 +12,10 @@ export const Products = ({ apiUrl, productId, ...props }) => {
     const [notification, setNotification] = useState(false);
     const [cartCount, setCartCount] = useState(0);
     const [cartId, setCartId] = useState();
-    var test = 0;
 
     const createCart=() => {
 
         let randonUser = Math.random().toString(36).substring(7);
-
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -50,8 +48,9 @@ export const Products = ({ apiUrl, productId, ...props }) => {
                 return response.json();
             })
             .then(function(myJson) {
-                console.log(myJson);
-                
+                if (myJson.items.length > 0) {
+                    setCartCount(myJson.items.length);
+                } 
             });
 
         console.log(requestOptions);
@@ -114,8 +113,7 @@ export const Products = ({ apiUrl, productId, ...props }) => {
             menuToggleAriaLabel="menu"
             skipTo="#content"
             skipToContentLabel="Skip to content"
-            >
-                
+            >    
                 <Navigation.Actions>
                     <a href="#"><div className="cartStatus">Ostoskori<div className="cartCount">{cartCount}</div></div></a>
                 </Navigation.Actions>
@@ -123,8 +121,6 @@ export const Products = ({ apiUrl, productId, ...props }) => {
             <div className="container">
                 
                 {notification === true && (<Notification label="Tuote lisätty ostoskoriin" type="success" dismissible onClose={() => setNotification(false)}>Tuote on lisätty ostoskoriin onnistuneesti!</Notification>)}
-
-                
                 <section className="productList">
                     {data.productId != null && (
                     <Card
