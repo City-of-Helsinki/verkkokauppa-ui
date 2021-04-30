@@ -6,9 +6,9 @@ import { Footer, Tooltip, Card, Navigation, Container, Button,Notification } fro
 import './product.css';
 import styles from "hds-react";
 
-export const Products = ({ apiUrl, productId, ...props }) => {
+export const Products = ({ productApiUrl, productId, cartApiUrl, userId, ...props }) => {
 
-    const [data,setData]=useState([]);
+    const [productList,setProductList]=useState([]);
     const [notification, setNotification] = useState(false);
     const [cartCount, setCartCount] = useState(0);
     const [cartId, setCartId] = useState();
@@ -19,10 +19,10 @@ export const Products = ({ apiUrl, productId, ...props }) => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({namespace: "asukaspysakointi", user: "Testihenkilo"})
+            body: JSON.stringify({namespace: "asukaspysakointi", user: userId})
         };
 
-        fetch('https://talpa-verkkokauppa-cart-experience-api-dev.apps.arodevtest.hel.fi/', requestOptions)
+        fetch(cartApiUrl, requestOptions)
             .then(function(response){
                 console.log(response)
                 return response.json();
@@ -42,13 +42,13 @@ export const Products = ({ apiUrl, productId, ...props }) => {
             headers: { 'Content-Type': 'application/json' }
         };
 
-        fetch('https://talpa-verkkokauppa-cart-experience-api-dev.apps.arodevtest.hel.fi/'+cartId)
+        fetch(cartApiUrl+cartId)
             .then(function(response){
                 console.log(response)
                 return response.json();
             })
             .then(function(myJson) {
-                if (myJson.items.length > 0) {
+                if (myJson.items != null && myJson.items.length > 0) {
                     setCartCount(myJson.items.length);
                 } 
             });
@@ -65,7 +65,7 @@ export const Products = ({ apiUrl, productId, ...props }) => {
             body: JSON.stringify({productId: e.target.getAttribute('productId'), quantity: 1})
         };
 
-        fetch('https://talpa-verkkokauppa-cart-experience-api-dev.apps.arodevtest.hel.fi/'+cartId+'/items', requestOptions)
+        fetch(cartApiUrl+cartId+'/items', requestOptions)
             .then(function(response){
                 console.log(response)
                 return response.json();
@@ -81,8 +81,8 @@ export const Products = ({ apiUrl, productId, ...props }) => {
         console.log(requestOptions);
     }
 
-    const getData=()=>{
-        fetch(apiUrl+productId
+    const getProductList=()=>{
+        fetch(productApiUrl+productId
         ,{
           headers : { 
             "Access-Control-Allow-Origin" : "*",
@@ -97,12 +97,12 @@ export const Products = ({ apiUrl, productId, ...props }) => {
           })
           .then(function(myJson) {
 
-            setData(myJson);
+            setProductList(myJson);
           });
       }
       useEffect(()=>{
         createCart();
-        getData();
+        getProductList();
       },[])
 
 
@@ -122,19 +122,19 @@ export const Products = ({ apiUrl, productId, ...props }) => {
                 
                 {notification === true && (<Notification label="Tuote lisätty ostoskoriin" type="success" dismissible onClose={() => setNotification(false)}>Tuote on lisätty ostoskoriin onnistuneesti!</Notification>)}
                 <section className="productList">
-                    {data.productId != null && (
+                    {productList.productId != null && (
                     <Card
                         border
-                        heading={data.name}
+                        heading={productList.name}
                         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                     >
-                        <button onClick={addToCart} productId={data.productId} type="button" className="Button-module_button__1msFE button_hds-button__2A0je Button-module_primary__2LfKB button_hds-button--primary__2NVvO"><span className="Button-module_label__a4np1 button_hds-button__label__2EQa-">Lisää ostoskoriin</span></button>
+                        <button onClick={addToCart} productId={productList.productId} type="button" className="Button-module_button__1msFE button_hds-button__2A0je Button-module_primary__2LfKB button_hds-button--primary__2NVvO"><span className="Button-module_label__a4np1 button_hds-button__label__2EQa-">Lisää ostoskoriin</span></button>
 
                         <div className="clear"></div>
                     </Card>
                     )}
 
-                    {data.productId === undefined && (
+                    {productList.productId === undefined && (
                         <Notification label="Virhetilanne" type="error">Tuotteiden haku ei onnistunut!</Notification>
                     )}
 
@@ -147,12 +147,15 @@ export const Products = ({ apiUrl, productId, ...props }) => {
 };
 
 Products.propTypes = {
-    apiUrl: PropTypes.string.isRequired,
+    productApiUrl: PropTypes.string.isRequired,
+    cartApiUrl: PropTypes.string.isRequired,
     productId: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
 };
   
 Products.defaultProps = {
-    apiUrl: 'https://talpa-verkkokauppa-product-experience-api-dev.apps.arodevtest.hel.fi/',
+    productApiUrl: 'https://talpa-verkkokauppa-product-experience-api-dev.apps.arodevtest.hel.fi/',
+    cartApiUrl: 'https://talpa-verkkokauppa-cart-experience-api-dev.apps.arodevtest.hel.fi/',
     productId: '97249ce6-b8ac-3b19-b81a-c026c4f0488b',
-    //productId: '7a691d19-df05-3bec-a786-fd3b9e991a2d'
+    userId: 'Testihenkilo'
 };
