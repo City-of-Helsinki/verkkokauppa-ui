@@ -14,8 +14,13 @@ RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT} && \
 USER 1001
 
 RUN yarn
-YARN_CACHE_FOLDER=/opt/app-root/src/yarncache yarn --production
-EXPOSE 6006
-CMD yarn storybook
+#EXPOSE 6006
+#CMD yarn storybook
 
+RUN yarn build-storybook -o /tmp/public
 
+FROM registry.access.redhat.com/ubi8/nginx-118
+
+COPY --from=base /tmp/public . 
+
+CMD nginx -g "daemon off;"
