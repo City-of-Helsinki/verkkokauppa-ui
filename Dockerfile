@@ -13,9 +13,8 @@ RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT} && \
     rpm-file-permissions
 USER 1001
 
-YARN_CACHE_FOLDER=/opt/app-root/src/yarncache yarn --production
-
 RUN yarn
+YARN_CACHE_FOLDER=/opt/app-root/src/yarncache yarn --production
 EXPOSE 6006
 CMD yarn storybook
 
