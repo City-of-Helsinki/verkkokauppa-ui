@@ -16,6 +16,8 @@ export const Products = ({ apiUrl, productId, ...props }) => {
 
     const createCart=() => {
 
+        let randonUser = Math.random().toString(36).substring(7);
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -124,6 +126,7 @@ export const Products = ({ apiUrl, productId, ...props }) => {
 
                 
                 <section className="productList">
+                    {data.productId != null && (
                     <Card
                         border
                         heading={data.name}
@@ -133,6 +136,12 @@ export const Products = ({ apiUrl, productId, ...props }) => {
 
                         <div className="clear"></div>
                     </Card>
+                    )}
+
+                    {data.productId === undefined && (
+                        <Notification label="Virhetilanne" type="error">Tuotteiden haku ei onnistunut!</Notification>
+                    )}
+
                 </section>
             </div>
             <Footer></Footer>
