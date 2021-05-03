@@ -1,0 +1,70 @@
+section {
+    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 48px 20px;
+    margin: 0 auto;
+    max-width: 600px;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+article {
+    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.container {
+    width: 100%;
+}
+
+.cartList {
+    margin: auto;
+}
+
+.cartList .totals {
+    float: right;
+}
+
+.cartList table {
+    padding: 20px;
+    width: 100%;
+}
+
+.cartList table th{
+    text-align: left;
+}
+
+.cartList div {
+    margin: auto;
+}
+
+.cartList button {
+    float: right;
+    margin-top: 20px;
+}
+
+.cartList .clear {
+    clear: both;
+}
+
+.cartStatus {
+    color: #000;
+    font-weight: 600;
+}
+
+.cartStatus .cartCount {
+    border-radius: 50%;
+    background: rgb(0,0,191);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    color: #FFF;
+    font-size: 14px;
+    line-height: 20px;
+    float: right;
+    margin-left: 10px;
+    padding: 5px;
+    margin-top: -5px;
+}
