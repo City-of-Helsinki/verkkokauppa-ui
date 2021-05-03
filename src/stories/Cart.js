@@ -11,7 +11,7 @@ export const Cart = ({ cartApiUrl, productId, userId, ...props }) => {
     const [notification, setNotification] = useState(false);
     const [cartCount, setCartCount] = useState(0);
     const [cartId, setCartId] = useState();
-    const [cartItems, setCartItems] = useState();
+    const [cartItems, setCartItems] = useState([]);
 
     const [cartTotalsGross,setCartTotalsGross]=useState(0);
     const [cartTotalsNet,setCartTotalsNet]=useState(0);
@@ -56,9 +56,10 @@ export const Cart = ({ cartApiUrl, productId, userId, ...props }) => {
                     setCartId(myJson.cartId);
                     setCartCount(myJson.items.length);
 
-                    var cartRows;
+                    var cartRows = [];
+
                     {myJson.items.map((key, index) => (
-                        cartRows = <tr><td>{key.productId}</td><td>{key.quantity}</td><td>{key.rowTotal.grossValue}&euro;</td><td>{key.rowTotal.vatValue}&euro;</td><td>{key.rowTotal.netValue}&euro;</td></tr>
+                        cartRows.push(<tr><td>{key.productId}</td><td>{key.quantity}</td><td>{key.rowTotal.grossValue}&euro;</td><td>{key.rowTotal.vatValue}&euro;</td><td>{key.rowTotal.netValue}&euro;</td></tr>)
 
                     ))}
 
