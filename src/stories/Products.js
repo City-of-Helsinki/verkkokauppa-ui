@@ -62,7 +62,7 @@ export const Products = ({ productApiUrl, productId, cartApiUrl, userId, ...prop
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({productId: e.target.getAttribute('productId'), quantity: 1})
+            body: JSON.stringify({productId: e.target.getAttribute('productid'), quantity: 1})
         };
 
         fetch(cartApiUrl+cartId+'/items', requestOptions)
@@ -115,7 +115,7 @@ export const Products = ({ productApiUrl, productId, cartApiUrl, userId, ...prop
             skipToContentLabel="Skip to content"
             >    
                 <Navigation.Actions>
-                    <a href="#"><div className="cartStatus">Ostoskori<div className="cartCount">{cartCount}</div></div></a>
+                    <a href="/?path=/story/demo-cart--browse-cart"><div className="cartStatus">Ostoskori<div className="cartCount">{cartCount}</div></div></a>
                 </Navigation.Actions>
             </Navigation>
             <div className="container">
@@ -128,7 +128,7 @@ export const Products = ({ productApiUrl, productId, cartApiUrl, userId, ...prop
                         heading={productList.name}
                         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                     >
-                        <button onClick={addToCart} productId={productList.productId} type="button" className="Button-module_button__1msFE button_hds-button__2A0je Button-module_primary__2LfKB button_hds-button--primary__2NVvO"><span className="Button-module_label__a4np1 button_hds-button__label__2EQa-">Lisää ostoskoriin</span></button>
+                        <button onClick={addToCart} productid={productList.productId} type="button" className="Button-module_button__1msFE button_hds-button__2A0je Button-module_primary__2LfKB button_hds-button--primary__2NVvO"><span className="Button-module_label__a4np1 button_hds-button__label__2EQa-">Lisää ostoskoriin</span></button>
 
                         <div className="clear"></div>
                     </Card>
@@ -154,8 +154,10 @@ Products.propTypes = {
 };
   
 Products.defaultProps = {
-    productApiUrl: 'https://talpa-verkkokauppa-product-experience-api-dev.apps.arodevtest.hel.fi/',
-    cartApiUrl: 'https://talpa-verkkokauppa-cart-experience-api-dev.apps.arodevtest.hel.fi/',
+    //productApiUrl: 'https://talpa-verkkokauppa-product-experience-api-dev.apps.arodevtest.hel.fi/',
+    productApiUrl: 'https://talpa-verkkokauppa-product-experience-api-test.apps.arodevtest.hel.fi/',
+    //cartApiUrl: 'https://talpa-verkkokauppa-cart-experience-api-dev.apps.arodevtest.hel.fi/',
+    cartApiUrl: 'https://talpa-verkkokauppa-cart-experience-api-test.apps.arodevtest.hel.fi/',
     productId: '97249ce6-b8ac-3b19-b81a-c026c4f0488b',
     userId: 'Testihenkilo'
 };
