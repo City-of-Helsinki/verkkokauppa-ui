@@ -40,6 +40,7 @@ export const useQuantity = props => {
     }, [debouncedOnChange, quantity]);
 
     const handleBlur = useCallback(() => {
+        // noinspection EqualityComparisonWithCoercionJS
         if (typeof quantity === 'number' && quantity != prevQuantity) {
             debouncedOnChange(quantity);
         }

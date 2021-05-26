@@ -1,9 +1,10 @@
 import React from 'react';
-import {IconTrash, Button, NumberInput} from "hds-react";
+import {func, number, shape, string} from "prop-types";
+import {IconTrash, Button} from "hds-react";
 
 import Price from "./product/Price";
+import NumberInput from "./product/NumberInput";
 import {useProduct} from "../../../talons/cart/productListing/useProduct";
-import Quantity from "./product/Quantity";
 
 const Product = props => {
     const {item, setIsCartUpdating} = props;
@@ -24,6 +25,7 @@ const Product = props => {
     } = item;
     const quantity = parseInt(item.quantity);
 
+    // TODO: better looking/styled item error message
     return (
         <li>
             <span className="itemErrorText">{errorMessage}</span>
@@ -33,7 +35,7 @@ const Product = props => {
                     <Price value={rowTotal.grossValue}/>{/* TODO: currency code? */}
                 </div>
                 <div className="itemQuantity">
-                    <Quantity
+                    <NumberInput
                         helperText="Seliteteksti"
                         initialValue={quantity}
                         onChange={handleUpdateItemQuantity}
@@ -44,8 +46,7 @@ const Product = props => {
                     <Button
                         variant="supplementary"
                         iconLeft={<IconTrash />}
-                        onClick={handleRemoveFromCart}
-                    >
+                        onClick={handleRemoveFromCart}>
                         Poista
                     </Button>
                 </div>
@@ -54,6 +55,15 @@ const Product = props => {
     );
 }
 
-// TODO: prop types
+Product.propTypes = {
+    setIsCartUpdating: func,
+    item: shape({
+        productId: number,
+        unit: string,
+        rowTotal: shape({
+            grossValue: number
+        })
+    })
+}
 
 export default Product;

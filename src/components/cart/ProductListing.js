@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 
 import Product from "./productListing/Product";
+import {array, func} from "prop-types";
 
 const ProductListing = props => {
     const {setIsCartUpdating, items} = props;
@@ -28,6 +29,9 @@ const ProductListing = props => {
     return null;
 }
 
-// TODO: prop types
+ProductListing.propTypes = {
+    setIsCartUpdating: func,
+    items: array
+};
 
 export default ProductListing;

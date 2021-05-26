@@ -1,22 +1,19 @@
 import React, {Fragment} from "react";
-import PropTypes from 'prop-types';
-import {Notification, Button} from "hds-react";
-import styles from "hds-react";
+import {func} from "prop-types";
+import {Button} from "hds-react";
 
 import ProductListing from './cart/ProductListing';
 import {useCart} from '../talons/cart/useCart';
 import PriceSummary from "./cart/PriceSummary";
 import LoadingIndicator from "./LoadingIndicator";
-import {useCartContext} from "../context/cart";
 import './cart/cart.css';
 
-export const Cart = props => {
+const Cart = props => {
     const {
         handleGoBack = () => {},
         handleProceedToCheckout = () => {}
     } = props;
 
-    const [{cartId}] = useCartContext();
     const {
         cartItems,
         totals,
@@ -29,14 +26,12 @@ export const Cart = props => {
     if (shouldShowLoadingIndicator) {
         return <LoadingIndicator />
     }
-    if (!cartId) { // TODO: translations (or maybe just remove completely)
-        return <Notification label="Virhetilanne" type="error">Ostoskorin haku ei onnistunut!</Notification>;
-    }
 
+    // TODO: translations
     if (!hasItems) {
         return (
             <Fragment>
-                <h3>Ostoskorisi on tällä hetkellä tyhjä{/* TODO: translations*/ }</h3>
+                <h3>Ostoskorisi on tällä hetkellä tyhjä</h3>
                 <Button
                     variant="supplementary"
                     onClick={handleGoBack}>
@@ -54,7 +49,6 @@ export const Cart = props => {
 
     return (
         <article>
-            {/* TODO: translations */}
             <div className="cartBody">
                 <h1>Ostoskori</h1>
                 <span>Täällä voit tarkastella ostoskorin sisältöä ja tehdä siihen muutoksia.</span>
@@ -82,11 +76,9 @@ export const Cart = props => {
     );
 };
 
-// TODO: remove
 Cart.propTypes = {
-    userId: PropTypes.string,
+    handleGoBack: func,
+    handleProceedToCheckout: func
 };
 
-Cart.defaultProps = {
-    userId: 'Testihenkilo'
-};
+export default Cart;

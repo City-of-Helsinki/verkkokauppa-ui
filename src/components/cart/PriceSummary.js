@@ -1,4 +1,5 @@
 import React from 'react';
+import {bool, number, shape} from "prop-types";
 
 const PriceSummary = props => {
     const {isUpdating, totals} = props; // TODO: currency code
@@ -19,6 +20,11 @@ const PriceSummary = props => {
     );
 };
 
-// TODO: prop types
+PriceSummary.propTypes = {
+    isUpdating: bool,
+    totals: shape({
+        grossValue: number,
+    })
+};
 
 export default PriceSummary;

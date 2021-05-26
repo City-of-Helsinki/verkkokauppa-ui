@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import {number} from "prop-types";
 
 const Price = props => {
     const { value } = props;
@@ -6,6 +7,8 @@ const Price = props => {
     return <div>{value + ' '}&#8364;</div>;
 };
 
-// TODO: prop types
+Price.propTypes = {
+    value: number.isRequired,
+};
 
 export default Price;
