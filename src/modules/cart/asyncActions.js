@@ -96,7 +96,9 @@ export const updateItemInCart = (payload = {}) => {
         dispatch(updateItemRequest());
 
         const {cart} = getState();
-        const {cartId} = cart;
+        // TODO: hardcoded only for testing!
+        //const {cartId} = cart;
+        const cartId = '8aa941fe-a123-3e45-989f-e9deae77e3b2';
 
         try {
             const variables = {

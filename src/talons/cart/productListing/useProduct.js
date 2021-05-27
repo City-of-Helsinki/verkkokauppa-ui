@@ -35,7 +35,7 @@ export const useProduct = props => {
             return '';
         }
 
-    }, [displayError, removeItemError, updateItemError]);
+    }, [removeItemError, updateItemError]);
 
     const handleRemoveFromCart = useCallback(() => {
         try {
@@ -46,7 +46,7 @@ export const useProduct = props => {
     }, [client, cartApi, item.productId]);
 
     const handleUpdateItemQuantity = useCallback(
-        async quantity => {
+        quantity => {
             try {
                 cartApi.updateItemInCart({client, productId: item.productId, quantity});
             } catch (err) {

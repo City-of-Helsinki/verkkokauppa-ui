@@ -1,13 +1,17 @@
 import axios from 'axios';
 import qs from 'qs';
 
-// noinspection JSUnresolvedVariable
-axios.defaults.headers.common['Content-type'] = 'application/json';
+const defaultOptions = {
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+    }
+};
 
 axios.defaults.paramsSerializer = (params) =>
     qs.stringify(params, {arrayFormat: 'repeat'});
 
-const client = axios.create();
+const client = axios.create(defaultOptions);
 
 const getClient = () => {
     return client;

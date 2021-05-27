@@ -21,7 +21,7 @@ export const initialState = {
     updateItemError: null
 };
 
-export default function (state = initialState, {type, payload = {}, error = null}) {
+const cartReducer = (state = initialState, {type, payload = {}, error = null}) => {
     switch (type) {
         case GET_CART.RECEIVE:
             if (error) {
@@ -111,4 +111,6 @@ export default function (state = initialState, {type, payload = {}, error = null
         default:
             return state;
     }
-}
+};
+
+export default cartReducer;

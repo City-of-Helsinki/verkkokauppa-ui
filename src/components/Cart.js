@@ -3,15 +3,15 @@ import {func} from "prop-types";
 import {Button} from "hds-react";
 
 import ProductListing from './cart/ProductListing';
-import {useCart} from '../talons/cart/useCart';
 import PriceSummary from "./cart/PriceSummary";
 import LoadingIndicator from "./LoadingIndicator";
+import {useCart} from '../talons/cart/useCart';
+import {useProceedToCheckout} from "../talons/cart/useProceedToCheckout";
 import './cart/cart.css';
 
 const Cart = props => {
     const {
-        handleGoBack = () => {},
-        handleProceedToCheckout = () => {}
+        handleGoBack = () => {}
     } = props;
 
     const {
@@ -22,6 +22,8 @@ const Cart = props => {
         setIsCartUpdating,
         shouldShowLoadingIndicator
     } = useCart();
+
+    const {handleProceedToCheckout} = useProceedToCheckout();
 
     if (shouldShowLoadingIndicator) {
         return <LoadingIndicator />
@@ -77,8 +79,7 @@ const Cart = props => {
 };
 
 Cart.propTypes = {
-    handleGoBack: func,
-    handleProceedToCheckout: func
+    handleGoBack: func
 };
 
 export default Cart;

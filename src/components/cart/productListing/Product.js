@@ -58,7 +58,7 @@ const Product = props => {
 Product.propTypes = {
     setIsCartUpdating: func,
     item: shape({
-        productId: number,
+        productId: string,
         unit: string,
         rowTotal: shape({
             grossValue: number
