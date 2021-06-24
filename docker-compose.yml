@@ -13,8 +13,11 @@ services:
       - '6006'
     ports:
       - '6006:6006'
-    command: npm run storybook --unsafe-perm
+    command: yarn storybook
     environment:
       - SERVICE_NAME=ui-components
       - VIRTUAL_PORT=6006
+      - STORYBOOK_CART_API_URL=https://talpa-verkkokauppa-cart-experience-api-dev.apps.arodevtest.hel.fi/
+      - STORYBOOK_ORDER_API_URL=https://talpa-verkkokauppa-order-experience-api-dev.apps.arodevtest.hel.fi/
+      - STORYBOOK_PRODUCT_API_URL=https://talpa-verkkokauppa-product-experience-api-dev.apps.arodevtest.hel.fi/
   
