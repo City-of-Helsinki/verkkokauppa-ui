@@ -3,13 +3,14 @@ import { useHistory } from "react-router-dom";
 
 import { useCartContext } from "../../context/CartContext";
 import { usePost } from "../../hooks/usePost";
+import { orderApiUrl } from "../../constants";
 
 export const useProceedToCheckout = (props) => {
   const [{ cartId }] = useCartContext();
   const history = useHistory();
 
   const { data, error, loading, postData: createOrder } = usePost(
-    `orderApiUrl/convert/${cartId}`
+    `${orderApiUrl}/convert/${cartId}`
   );
 
   const handleProceedToCheckout = useCallback(() => {
