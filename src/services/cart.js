@@ -16,7 +16,6 @@ export const fetchCart = async (client, cartId) => {
 
 export const updateItem = async (client, cartId, productId, payload) => {
   const queryBodyStr = JSON.stringify(payload);
-  // noinspection ES6RedundantAwait
   return await client.put(
     `${cartApiUrl}${cartId}/items/${productId}`,
     queryBodyStr
@@ -24,7 +23,5 @@ export const updateItem = async (client, cartId, productId, payload) => {
 };
 
 export const removeItemFromCart = async (client, cartId, productId) => {
-  return await client.delete(
-    `${cartApiUrl}${cartId}/items/${productId}` + productId
-  );
+  return await client.delete(`${cartApiUrl}${cartId}/items/${productId}`);
 };
