@@ -10,7 +10,7 @@ export const useProceedToCheckout = (props) => {
   const history = useHistory();
 
   const { data, error, loading, postData: createOrder } = usePost(
-    `${orderApiUrl}/convert/${cartId}`
+    `${orderApiUrl}convert/${cartId}`
   );
 
   const handleProceedToCheckout = useCallback(() => {
